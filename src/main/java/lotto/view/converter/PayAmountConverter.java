@@ -1,17 +1,16 @@
 package lotto.view.converter;
 
 import lotto.constants.ErrorMessage;
-import lotto.constants.PromptMessage;
 import lotto.domain.PayAmount;
 import lotto.exception.LottoException;
 
 public class PayAmountConverter extends AbstractInputConverter<PayAmount> {
-    public PayAmountConverter(PromptMessage promptMessage) {
-        super(promptMessage);
+    public PayAmountConverter(String prompt) {
+        super(prompt);
     }
 
     @Override
-    public PayAmount parse(String input) {
+    protected PayAmount parse(String input) {
         if (input.isEmpty()) {
             throw new LottoException(ErrorMessage.PAY_AMOUNT_EMPTY);
         }
