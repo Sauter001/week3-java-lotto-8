@@ -14,6 +14,11 @@ public class ConsoleView implements View {
     }
 
     @Override
+    public void printError(Exception e) {
+        System.out.println(e.getMessage());
+    }
+
+    @Override
     public void close() {
         Console.close();
     }

@@ -7,7 +7,11 @@ import lotto.view.View;
 public class Application {
     public static void main(String[] args) {
         View view = new ConsoleView();
-        LottoController controller = new LottoController(view);
-        controller.run();
+        try {
+            LottoController controller = new LottoController(view);
+            controller.run();
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            view.printError(e);
+        }
     }
 }

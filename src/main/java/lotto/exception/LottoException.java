@@ -1,6 +1,6 @@
 package lotto.exception;
 
-import lotto.constants.ErrorCode;
+import lotto.constants.ErrorMessage;
 
 public class LottoException extends IllegalArgumentException {
     private static final String ERROR_MESSAGE_FORMAT = "[ERROR] %s";
@@ -10,7 +10,7 @@ public class LottoException extends IllegalArgumentException {
         super(String.format(ERROR_MESSAGE_FORMAT, DEFAULT_ERROR_MESSAGE));
     }
 
-    public LottoException(ErrorCode errorCode) {
-        super(String.format(ERROR_MESSAGE_FORMAT, errorCode.getMessage()));
+    public LottoException(ErrorMessage errorMessage) {
+        super(String.format(ERROR_MESSAGE_FORMAT, errorMessage.getMessage()));
     }
 }

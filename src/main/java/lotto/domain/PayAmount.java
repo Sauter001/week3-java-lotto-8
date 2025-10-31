@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.constants.ErrorCode;
+import lotto.constants.ErrorMessage;
 import lotto.exception.LottoException;
 
 public record PayAmount(int amount) {
@@ -12,11 +12,11 @@ public record PayAmount(int amount) {
 
     private void validateAmount(int amount) {
         if (amount <= 0) {
-            throw new LottoException(ErrorCode.PAY_AMOUNT_NOT_POSITIVE);
+            throw new LottoException(ErrorMessage.PAY_AMOUNT_NOT_POSITIVE);
         }
 
         if (amount % UNIT_LOTTO_PRICE > 0) {
-            throw new LottoException(ErrorCode.PAY_AMOUNT_NOT_DIVIDED_IN_1000);
+            throw new LottoException(ErrorMessage.PAY_AMOUNT_NOT_DIVIDED_IN_1000);
         }
     }
 
