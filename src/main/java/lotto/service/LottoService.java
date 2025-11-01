@@ -12,7 +12,7 @@ import java.util.List;
 public class LottoService {
     public PurchasedLottos generateLottos(PayAmount payAmount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < payAmount.getNumberOfLottos(); i++) {
+        for (int i = 0; i < payAmount.countLotto(); i++) {
             Lotto lotto = new Lotto(generateLottoNumbers());
             lottos.add(lotto);
         }

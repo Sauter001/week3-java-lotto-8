@@ -19,7 +19,7 @@ public class PurchasedLottos {
     }
 
     private void validate(List<Lotto> lottos, PayAmount payAmount) {
-        if (lottos.size() != payAmount.getNumberOfLottos()) {
+        if (lottos.size() != payAmount.countLotto()) {
             throw new LottoException(ErrorMessage.GENERATED_LOTTO_MISMATCH);
         }
     }
