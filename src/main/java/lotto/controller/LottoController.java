@@ -1,11 +1,9 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
+import lotto.domain.PurchasedLottos;
 import lotto.domain.PayAmount;
 import lotto.service.LottoService;
 import lotto.view.View;
-
-import java.util.List;
 
 public class LottoController {
     private final View view;
@@ -18,7 +16,8 @@ public class LottoController {
 
     public void run() {
         PayAmount payAmount = view.readPayAmount();
-        List<Lotto> lottos = lottoService.generateLottos(payAmount);
+        PurchasedLottos purchasedLottos = lottoService.generateLottos(payAmount);
+        view.printPurchasedLottos(purchasedLottos);
         view.close();
     }
 }

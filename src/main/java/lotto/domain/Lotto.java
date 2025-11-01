@@ -1,5 +1,12 @@
 package lotto.domain;
 
+import lotto.constants.ErrorFormat;
+import lotto.constants.ErrorMessage;
+import lotto.exception.LottoException;
+import lotto.util.LottoNumberValidator;
+
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 /*
@@ -17,9 +24,37 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public List<Integer> getNumbers() {
+        // 불변 리스트 반환
+        return Collections.unmodifiableList(numbers);
+    }
+
     private void validate(List<Integer> numbers) {
+        numbers.forEach(LottoNumberValidator::validateRange);
+        validateLottoLength(numbers);
+        validateNumberDuplication(numbers);
+        validateSort(numbers);
+    }
+
+    private void validateSort(List<Integer> numbers) {
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            if  (numbers.get(i) > numbers.get(i + 1)) {
+                throw new LottoException(ErrorMessage.LOTTO_NOT_SORTED);
+            }
+        }
+    }
+
+    private void validateNumberDuplication(List<Integer> numbers) {
+        HashSet<Integer> set = new HashSet<>(numbers);
+
+        if (set.size() != numbers.size()) {
+            throw new LottoException(ErrorMessage.LOTTO_NUMBER_DUPLICATES);
+        }
+    }
+
+    private void validateLottoLength(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+            throw new LottoException(ErrorMessage.LOTTO_LENGTH_NOT_CORRECT);
         }
     }
 }
