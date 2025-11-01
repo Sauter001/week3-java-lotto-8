@@ -36,22 +36,6 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        numbers.forEach(LottoNumberValidator::validateRange);
-        validateLottoLength(numbers);
-        validateNumberDuplication(numbers);
-    }
-
-    private void validateNumberDuplication(List<Integer> numbers) {
-        HashSet<Integer> set = new HashSet<>(numbers);
-
-        if (set.size() != numbers.size()) {
-            throw new LottoException(ErrorMessage.LOTTO_NUMBER_DUPLICATES);
-        }
-    }
-
-    private void validateLottoLength(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new LottoException(ErrorMessage.LOTTO_LENGTH_NOT_CORRECT);
-        }
+        LottoNumberValidator.validateList(numbers);
     }
 }
