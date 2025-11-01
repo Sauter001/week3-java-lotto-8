@@ -31,7 +31,7 @@ public final class LottoNumberValidator {
     }
 
     private static void validateLottoLength(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LottoConstant.LOTTO_NUMBERS_LENGTH) {
             throw new LottoException(ErrorMessage.LOTTO_LENGTH_NOT_CORRECT);
         }
     }

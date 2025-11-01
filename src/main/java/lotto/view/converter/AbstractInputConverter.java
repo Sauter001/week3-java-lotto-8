@@ -14,13 +14,22 @@ public abstract class AbstractInputConverter<T> implements InputConverter<T> {
     @Override
     public final T convert() {
         while (true) {
-            try {
-                System.out.println(this.prompt);
-                String input = readInputSafely();
-                return this.parse(input);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+            T result = tryParse();
+
+            if (result != null) {
+                return result;
             }
+        }
+    }
+
+    private T tryParse() {
+        try {
+            System.out.println(this.prompt);
+            String input = readInputSafely();
+            return this.parse(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
