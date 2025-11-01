@@ -5,9 +5,11 @@ import lotto.constants.ErrorMessage;
 import lotto.exception.LottoException;
 import lotto.util.LottoNumberValidator;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /*
  * 제공된 Lotto 클래스를 사용해야 합니다.
@@ -21,7 +23,11 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        this.numbers = sortNumbers(numbers);
+    }
+
+    private List<Integer> sortNumbers(List<Integer> numbers) {
+        return numbers.stream().sorted().toList();
     }
 
     public List<Integer> getNumbers() {
@@ -33,15 +39,6 @@ public class Lotto {
         numbers.forEach(LottoNumberValidator::validateRange);
         validateLottoLength(numbers);
         validateNumberDuplication(numbers);
-        validateSort(numbers);
-    }
-
-    private void validateSort(List<Integer> numbers) {
-        for (int i = 0; i < numbers.size() - 1; i++) {
-            if  (numbers.get(i) > numbers.get(i + 1)) {
-                throw new LottoException(ErrorMessage.LOTTO_NOT_SORTED);
-            }
-        }
     }
 
     private void validateNumberDuplication(List<Integer> numbers) {

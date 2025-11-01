@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThatNoException;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 class LottoTest {
     @Test
@@ -14,6 +13,19 @@ class LottoTest {
     void lottoNumberThreshold() {
         assertThatNoException().isThrownBy(() -> new Lotto(List.of(1, 2, 3, 5, 7, 45)));
     }
+
+    @Test
+    @DisplayName("정렬 되지 않은 로또 번호 자동 정렬")
+    void lottoSorted() {
+        Lotto lotto = new  Lotto(List.of(1, 7, 3, 9, 24, 10));
+        List<Integer> numbers = lotto.getNumbers();
+
+        for (int i = 0; i < numbers.size() - 1; i++) {
+            assertThat(numbers.get(i) < numbers.get(i + 1)).isTrue();
+        }
+    }
+
+    // === 예외 상황 ===
 
     @Test
     void lottoNumbersExceed6() {
@@ -41,13 +53,6 @@ class LottoTest {
     @Test
     void lottoNumberDuplication() {
         assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 5)))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName("로또 번호가 정렬 안 되면 예외")
-    @Test
-    void lottoNotSorted() {
-        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 5, 4, 6)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
