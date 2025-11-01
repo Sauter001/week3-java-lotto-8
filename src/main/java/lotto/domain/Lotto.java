@@ -1,16 +1,9 @@
 package lotto.domain;
 
-import lotto.constants.ErrorFormat;
-import lotto.constants.ErrorMessage;
-import lotto.constants.LottoNumberType;
-import lotto.exception.LottoException;
 import lotto.util.LottoNumberValidator;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /*
  * 제공된 Lotto 클래스를 사용해야 합니다.
@@ -37,6 +30,6 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        LottoNumberValidator.validateList(numbers, LottoNumberType.LOTTO);
+        LottoNumberValidator.validateList(numbers);
     }
 }

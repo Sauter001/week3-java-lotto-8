@@ -8,6 +8,7 @@ public enum ErrorMessage {
     PAY_AMOUNT_EMPTY("구입 금액이 입력되지 않았습니다."),
 
     // === 로또 ====
+    LOTTO_NUMBER_DUPLICATES("번호가 중복됩니다."),
     GENERATED_LOTTO_MISMATCH("로또 생성 개수가 구입 개수와 일치하지 않습니다.");
 
     // === 당첨 번호 ===

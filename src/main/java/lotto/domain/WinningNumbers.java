@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.constants.LottoNumberType;
 import lotto.util.LottoNumberValidator;
 
 import java.util.HashSet;
@@ -33,6 +32,6 @@ public class WinningNumbers {
     }
 
     private void validate(List<Integer> numbers) {
-        LottoNumberValidator.validateList(numbers, LottoNumberType.WINNING);
+        LottoNumberValidator.validateList(numbers);
     }
 }
