@@ -1,42 +1,40 @@
 package lotto.util;
 
-import lotto.constants.ErrorFormat;
-import lotto.constants.ErrorMessage;
 import lotto.constants.LottoConstant;
-import lotto.exception.LottoException;
+import lotto.constants.LottoNumberType;
 import lotto.exception.UtilClassException;
 
 import java.util.HashSet;
 import java.util.List;
 
 public final class LottoNumberValidator {
-    public static void validateRange(int number) {
+    private LottoNumberValidator() {
+        throw new UtilClassException();
+    }
+
+    public static void validateRange(int number, LottoNumberType type) {
         if (number < LottoConstant.LOTTO_MIN_NUMBER || number > LottoConstant.LOTTO_MAX_NUMBER) {
-            throw new LottoException(ErrorFormat.LOTTO_NUMBER_OUT_OF_RANGE, number);
+            throw type.createRangeException(number);
         }
     }
 
-    public static void validateList(List<Integer> numbers) {
-        numbers.forEach(LottoNumberValidator::validateRange);
-        validateLottoLength(numbers);
-        validateNumberDuplication(numbers);
+    public static void validateList(List<Integer> numbers, LottoNumberType type) {
+        numbers.forEach(number -> validateRange(number, type));
+        validateLottoLength(numbers, type);
+        validateNumberDuplication(numbers, type);
     }
 
-    private static void validateNumberDuplication(List<Integer> numbers) {
+    private static void validateNumberDuplication(List<Integer> numbers, LottoNumberType type) {
         HashSet<Integer> set = new HashSet<>(numbers);
 
         if (set.size() != numbers.size()) {
-            throw new LottoException(ErrorMessage.LOTTO_NUMBER_DUPLICATES);
+            throw type.createDuplicationException();
         }
     }
 
-    private static void validateLottoLength(List<Integer> numbers) {
+    private static void validateLottoLength(List<Integer> numbers, LottoNumberType type) {
         if (numbers.size() != LottoConstant.LOTTO_NUMBERS_LENGTH) {
-            throw new LottoException(ErrorMessage.LOTTO_LENGTH_NOT_CORRECT);
+            throw type.createInvalidLengthException();
         }
-    }
-
-    private LottoNumberValidator() {
-        throw new UtilClassException();
     }
 }

@@ -2,6 +2,7 @@ package lotto.domain;
 
 import lotto.constants.ErrorFormat;
 import lotto.constants.ErrorMessage;
+import lotto.constants.LottoNumberType;
 import lotto.exception.LottoException;
 import lotto.util.LottoNumberValidator;
 
@@ -36,6 +37,6 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        LottoNumberValidator.validateList(numbers);
+        LottoNumberValidator.validateList(numbers, LottoNumberType.LOTTO);
     }
 }
