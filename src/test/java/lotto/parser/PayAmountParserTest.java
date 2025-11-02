@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class PayAmountParserTest {
@@ -52,5 +54,15 @@ public class PayAmountParserTest {
     void invalidInputParse(String input) {
         assertThatException().isThrownBy(() -> payAmountParser.parse(input))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("INT 범위 밖 입력 에러")
+    void intOutOfRange() {
+        List<String> longValues = List.of(String.valueOf(0x80000000L), "2147484000");
+        for  (String value : longValues) {
+            assertThatException().isThrownBy(() -> payAmountParser.parse(value))
+                    .isInstanceOf(IllegalArgumentException.class);
+        }
     }
 }
