@@ -1,28 +1,30 @@
 package lotto.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import lotto.constants.Rank;
 import lotto.constants.UIConstant;
-import lotto.domain.*;
+import lotto.domain.PayAmount;
+import lotto.domain.WinningCriteria;
+import lotto.domain.WinningNumbers;
 import lotto.dto.LottoDto;
 import lotto.dto.PurchasedLottosDto;
+import lotto.dto.WinningResultDto;
 import lotto.parser.InputParser;
 import lotto.parser.PayAmountParser;
 import lotto.parser.WinningCriteriaParser;
 import lotto.parser.WinningNumbersParser;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-public class ConsoleView implements View {
-    public static final String PROMPT_WINNING_NUMBER = "당첨 번호를 입력해 주세요.";
-    private static final String PROMPT_PAY_AMOUNT = "구입금액을 입력해 주세요.";
-    private static final String PROMPT_PURCHASED_LOTTOS_FORMAT = "%d개를 구매했습니다.\n";
-    private static final String PROMPT_BONUS_NUMBER = "보너스 번호를 입력해 주세요.";
-    private static final String INPUT_UNACCEPTABLE = "입력을 더 이상 받을 수 없습니다.";
-    private static final String LOTTO_NUMBER_DELIMITER = ", ";
-    private static final String LIST_PREFIX = "[";
-    private static final String LIST_SUFFIX = "]";
+import static lotto.constants.UIConstant.*;
 
+public class ConsoleView implements View {
     @Override
     public PayAmount readPayAmount() {
         InputParser<PayAmount> parser = new PayAmountParser();
@@ -53,6 +55,38 @@ public class ConsoleView implements View {
         System.out.println();
     }
 
+    @Override
+    public void printWinningResult(WinningResultDto winningResultDto) {
+        List<Rank> ranksToPrint = List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+        Map<Rank, Integer> counter = winningResultDto.counter();
+
+        System.out.println();
+        System.out.println(OUTPUT_WINNING_STATISTICS_TITLE);
+        System.out.println(DIVISION);
+        for (Rank rank : ranksToPrint) {
+            printRankInfo(rank, counter.get(rank));
+        }
+        printProfitRate(winningResultDto.rateOfProfit());
+    }
+
+    private void printProfitRate(BigDecimal bigDecimal) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0.0");
+        decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
+        System.out.printf(OUTPUT_PROFIT_RATE, decimalFormat.format(bigDecimal));
+    }
+
+    private void printRankInfo(Rank rank, Integer matchedCount) {
+        String bonusRequirement = "";
+        if (rank.isRequireBonus()) {
+            bonusRequirement = BONUS_REQUIRED;
+        }
+
+        DecimalFormat prizeFormat =  new DecimalFormat("#,##0");
+        String prizeOutput = prizeFormat.format(rank.getPrize());
+
+        System.out.printf(OUTPUT_MATCHED_RANK_INFO_FORMAT, rank.getNumberToMatch(), bonusRequirement, prizeOutput, matchedCount);
+    }
+
     private void printLotto(LottoDto lotto) {
         String lottoContent = lotto.numbers().stream()
                 .map(String::valueOf)
@@ -63,7 +97,7 @@ public class ConsoleView implements View {
     @Override
     public void printError(Exception e) {
         if (!e.getMessage().startsWith(UIConstant.ERROR_PREFIX)) {
-            System.out.printf(UIConstant.FORMAT_ERROR + "\n", e.getMessage());
+            System.out.printf(UIConstant.ERROR_FORMAT + "\n", e.getMessage());
             return;
         }
 
@@ -84,7 +118,7 @@ public class ConsoleView implements View {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             } catch (NoSuchElementException e) {
-                throw new IllegalStateException(INPUT_UNACCEPTABLE, e);
+                throw new IllegalStateException(ERR_INPUT_UNACCEPTABLE, e);
             }
         }
     }

@@ -34,6 +34,14 @@ public enum Rank {
         return countMatches && bonusMatches;
     }
 
+    public int getNumberToMatch() {
+        return numberToMatch;
+    }
+
+    public boolean isRequireBonus() {
+        return requireBonus;
+    }
+
     public long getPrize() {
         return prize;
     }

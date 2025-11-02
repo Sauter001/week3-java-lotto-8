@@ -18,7 +18,7 @@ public class WinningNumbers {
         return numbers.stream().sorted().toList();
     }
 
-    public int countMatchedNumber(Lotto lotto) {
+    public int countMatchedNumberFrom(Lotto lotto) {
         HashSet<Integer> lottoSet = new HashSet<>(lotto.getNumbers());
         int count = 0;
 

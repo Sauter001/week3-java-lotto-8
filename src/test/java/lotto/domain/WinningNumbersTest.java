@@ -22,7 +22,7 @@ public class WinningNumbersTest {
     void matchLottoNumberFull() {
         WinningNumbers  winningNumbers = new WinningNumbers(List.of(1, 2, 3, 5, 7, 45));
 
-        assertThat(winningNumbers.countMatchedNumber(defaultLotto)).isEqualTo(6);
+        assertThat(winningNumbers.countMatchedNumberFrom(defaultLotto)).isEqualTo(6);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class WinningNumbersTest {
     void mismatchWholeLottoNumber() {
         WinningNumbers  winningNumbers = new WinningNumbers(List.of(4, 6, 9, 10, 25, 31));
 
-        assertThat(winningNumbers.countMatchedNumber(defaultLotto)).isEqualTo(0);
+        assertThat(winningNumbers.countMatchedNumberFrom(defaultLotto)).isEqualTo(0);
     }
 
     @Test
@@ -38,7 +38,7 @@ public class WinningNumbersTest {
     void mismatchPartialLottoNumber() {
         WinningNumbers  winningNumbers = new WinningNumbers(List.of(1, 2, 3, 6, 9, 45));
 
-        assertThat(winningNumbers.countMatchedNumber(defaultLotto)).isEqualTo(4);
+        assertThat(winningNumbers.countMatchedNumberFrom(defaultLotto)).isEqualTo(4);
     }
 
     // === 예외 상황 ===

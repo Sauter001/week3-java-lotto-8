@@ -29,6 +29,10 @@ public class Lotto {
         return Collections.unmodifiableList(numbers);
     }
 
+    public boolean hasBonusNumber(BonusNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber.value());
+    }
+
     private void validate(List<Integer> numbers) {
         LottoNumberValidator.validateList(numbers);
     }

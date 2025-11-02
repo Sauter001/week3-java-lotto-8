@@ -20,6 +20,6 @@ public class LottoException extends IllegalArgumentException {
     }
 
     private static String formatMessage(String message) {
-        return String.format(UIConstant.FORMAT_ERROR, message);
+        return String.format(UIConstant.ERROR_FORMAT, message);
     }
 }

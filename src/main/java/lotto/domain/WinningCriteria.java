@@ -3,6 +3,8 @@ package lotto.domain;
 import lotto.constants.ErrorMessage;
 import lotto.exception.LottoException;
 
+import java.util.List;
+
 public class WinningCriteria {
     private final WinningNumbers winningNumbers;
     private final BonusNumber bonusNumber;
@@ -11,6 +13,10 @@ public class WinningCriteria {
         validateNotDuplication(winningNumbers, bonusNumber);
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
+    }
+
+    public WinningCounter countWinnings(PurchasedLottos purchasedLottos) {
+         return purchasedLottos.countMatchedNumbers(winningNumbers, bonusNumber);
     }
 
     private void validateNotDuplication(WinningNumbers winningNumbers, BonusNumber bonusNumber) {

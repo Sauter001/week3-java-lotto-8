@@ -1,11 +1,11 @@
 package lotto.domain;
 
 import lotto.constants.ErrorMessage;
+import lotto.constants.Rank;
 import lotto.dto.LottoDto;
 import lotto.dto.PurchasedLottosDto;
 import lotto.exception.LottoException;
 
-import java.util.Collections;
 import java.util.List;
 
 public class PurchasedLottos {
@@ -26,8 +26,17 @@ public class PurchasedLottos {
         }
     }
 
-    public List<Lotto> getPurchasedLottos() {
-        return Collections.unmodifiableList(lottos);
+    public WinningCounter countMatchedNumbers(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
+        WinningCounter winningCounter = new WinningCounter();
+
+        for (Lotto lotto : this.lottos) {
+            int countedWinningNumber = winningNumbers.countMatchedNumberFrom(lotto);
+            boolean matchesBonus = lotto.hasBonusNumber(bonusNumber);
+            Rank rank = Rank.of(countedWinningNumber, matchesBonus);
+
+            winningCounter.increment(rank);
+        }
+        return winningCounter;
     }
 
     public PurchasedLottosDto toDto() {

@@ -2,10 +2,10 @@ package lotto.service;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import lotto.constants.LottoConstant;
-import lotto.domain.Lotto;
-import lotto.domain.PurchasedLottos;
-import lotto.domain.PayAmount;
+import lotto.domain.*;
+import lotto.dto.WinningResultDto;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +18,15 @@ public class LottoService {
         }
 
         return new PurchasedLottos(lottos, payAmount);
+    }
+
+    public WinningResultDto aggregateWinningResult(
+            PayAmount payAmount,
+            PurchasedLottos purchasedLottos,
+            WinningCriteria winningCriteria) {
+        WinningCounter counter = winningCriteria.countWinnings(purchasedLottos);
+        BigDecimal rateOfProfit = counter.calculateRateOfProfit(payAmount);
+        return new WinningResultDto(counter.getMap(), rateOfProfit);
     }
 
     private List<Integer> generateLottoNumbers() {
