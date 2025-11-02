@@ -13,7 +13,13 @@ public enum ErrorMessage {
 
     // === 당첨 번호 ===
     WINNING_NUMBER_CANNOT_SPLIT("공백은 당첨 번호가 될 수 없습니다."),
-    WINNING_NUMBER_NOT_INTEGER("당첨 번호가 정수가 아닙니다.");
+    WINNING_NUMBER_NOT_INTEGER("당첨 번호가 정수가 아닙니다."),
+
+    // === 보너스 번호 ===
+    BONUS_NUMBER_EMPTY("보너스 번호가 입력되지 않았습니다."),
+    BONUS_NUMBER_NOT_INTEGER("보너스 번호가 정수가 아닙니다."),
+    BONUS_NUMBER_DUPLICATED_WITH_WINNING_NUMBER("보너스 번호가 당첨 번호와 중복됩니다.");
+
 
     private final String message;
 

@@ -1,13 +1,10 @@
 package lotto.view;
 
-import lotto.domain.Lotto;
-import lotto.domain.PayAmount;
-import lotto.domain.PurchasedLottos;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 
 public interface View {
     PayAmount readPayAmount();
-    WinningNumbers readWinningNumbers();
+    WinningCriteria readWinningCriteria();
 
     void printPurchasedLottos(PurchasedLottos lottos);
 

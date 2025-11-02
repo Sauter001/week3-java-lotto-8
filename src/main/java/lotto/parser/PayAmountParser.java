@@ -7,7 +7,7 @@ import lotto.exception.LottoException;
 public class PayAmountParser implements  InputParser<PayAmount> {
     @Override
     public PayAmount parse(String input) {
-        if (input.isEmpty()) {
+        if (input.isBlank()) {
             throw new LottoException(ErrorMessage.PAY_AMOUNT_EMPTY);
         }
 

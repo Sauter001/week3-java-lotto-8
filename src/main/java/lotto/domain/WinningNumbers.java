@@ -31,6 +31,10 @@ public class WinningNumbers {
         return count;
     }
 
+    public boolean hasBonusNumber(BonusNumber bonusNumber) {
+        return this.numbers.contains(bonusNumber.value());
+    }
+
     private void validate(List<Integer> numbers) {
         LottoNumberValidator.validateList(numbers);
     }

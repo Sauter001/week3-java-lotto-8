@@ -7,10 +7,10 @@ public record PayAmount(int amount) {
     private static final int UNIT_LOTTO_PRICE = 1000;
 
     public PayAmount {
-        validateAmount(amount);
+        validate(amount);
     }
 
-    private void validateAmount(int amount) {
+    private void validate(int amount) {
         validatePositive(amount);
         validateUnit(amount);
     }

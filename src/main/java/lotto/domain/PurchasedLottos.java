@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class PurchasedLottos {
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public PurchasedLottos(List<Lotto> lottos, PayAmount payAmount) {
         validate(lottos, payAmount);
