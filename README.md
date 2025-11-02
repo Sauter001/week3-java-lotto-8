@@ -159,9 +159,9 @@
 
 ### 수익 및 수익률 계산
 
-- [ ] 당첨된 로또가 해당하는 금액을 모두 더해 **수익** 계산
-- [ ] `수익률 = (수익 / 구입 금액) * 100 (%)`
-- [ ] 소수점 둘째 자리에서 반올림
+- [x] 당첨된 로또가 해당하는 금액을 모두 더해 **수익** 계산
+- [x] `수익률 = (수익 / 구입 금액) * 100 (%)`
+- [x] 소수점 둘째 자리에서 반올림
 - 참고: 순수익(당첨금 - 구입금액)이 아닌 총 당첨금 기준으로 계산
 
 <details>
@@ -198,11 +198,11 @@ $$\frac{W}{C}\times100=\frac{1,510,000}{8,000}\times100=18,875\ \text{(\\%)}$$
 
 ### 당첨 통계 출력
 
-- [ ] 당첨 기준에 해당하는 복권의 카운트 결과 출력
+- [x] 당첨 기준에 해당하는 복권의 카운트 결과 출력
     - 카운트 결과는 당첨 금액 기준으로 오름차순 정렬되게 출력 💭
         - 요구사항에 명시되지는 않았으나 실행 결과 예시로부터 판단
     - 일치하는 수별 당첨 금액은 1000의 자리 단위로 `,`로 구분
-- [ ] 수익률 출력
+- [x] 수익률 출력
     - 수익률은 소수점 둘째 자리에서 반올림하며 1000의자리 단위로 `,` 표시를 한다. (예: `100.0%`, `51.5%`, `1,000,000.0%`)
 
 #### 출력 형식
@@ -283,4 +283,55 @@ $$\frac{W}{C}\times100=\frac{1,510,000}{8,000}\times100=18,875\ \text{(\\%)}$$
 
 ## 폴더 구조
 
-TBA
+```text
+└───java
+    └───lotto
+        │   Application.java
+        │
+        ├───constants
+        │       ErrorFormat.java
+        │       ErrorMessage.java
+        │       LottoConstant.java
+        │       Rank.java
+        │       UIConstant.java
+        │
+        ├───controller
+        │       LottoController.java
+        │
+        ├───domain
+        │       BonusNumber.java
+        │       Lotto.java
+        │       PayAmount.java
+        │       PurchasedLottos.java
+        │       WinningCounter.java
+        │       WinningCriteria.java
+        │       WinningNumbers.java
+        │
+        ├───dto
+        │       LottoDto.java
+        │       PurchasedLottosDto.java
+        │       WinningResultDto.java
+        │
+        ├───exception
+        │       LottoException.java
+        │       NumberOutOfRangeException.java
+        │       UtilClassException.java
+        │
+        ├───parser
+        │       BonusNumberParser.java
+        │       InputParser.java
+        │       PayAmountParser.java
+        │       WinningCriteriaParser.java
+        │       WinningNumbersParser.java
+        │
+        ├───service
+        │       LottoService.java
+        │
+        ├───util
+        │       LottoNumberValidator.java
+        │
+        └───view
+                ConsoleView.java
+                View.java
+
+```
