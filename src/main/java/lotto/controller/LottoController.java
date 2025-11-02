@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.PurchasedLottos;
 import lotto.domain.PayAmount;
+import lotto.domain.WinningNumbers;
 import lotto.service.LottoService;
 import lotto.view.View;
 
@@ -18,6 +19,7 @@ public class LottoController {
         PayAmount payAmount = view.readPayAmount();
         PurchasedLottos purchasedLottos = lottoService.generateLottos(payAmount);
         view.printPurchasedLottos(purchasedLottos);
+        WinningNumbers winningNumbers = view.readWinningNumbers();
         view.close();
     }
 }

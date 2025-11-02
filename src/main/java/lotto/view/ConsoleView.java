@@ -5,17 +5,19 @@ import lotto.constants.UIConstant;
 import lotto.domain.Lotto;
 import lotto.domain.PayAmount;
 import lotto.domain.PurchasedLottos;
+import lotto.domain.WinningNumbers;
 import lotto.parser.InputParser;
 import lotto.parser.PayAmountParser;
+import lotto.parser.WinningNumbersParser;
 
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class ConsoleView implements View {
+    public static final String PROMPT_WINNING_NUMBER = "당첨 번호를 입력해 주세요.";
     private static final String PROMPT_PAY_AMOUNT = "구입금액을 입력해 주세요.";
     private static final String PROMPT_PURCHASED_LOTTOS_FORMAT = "%d개를 구매했습니다.\n";
     private static final String INPUT_UNACCEPTABLE = "입력을 더 이상 받을 수 없습니다.";
-
     private static final String LOTTO_NUMBER_DELIMITER = ", ";
     private static final String LIST_PREFIX = "[";
     private static final String LIST_SUFFIX = "]";
@@ -24,6 +26,12 @@ public class ConsoleView implements View {
     public PayAmount readPayAmount() {
         PayAmountParser parser = new PayAmountParser();
         return readWithRetry(PROMPT_PAY_AMOUNT, parser);
+    }
+
+    @Override
+    public WinningNumbers readWinningNumbers() {
+        WinningNumbersParser parser = new WinningNumbersParser();
+        return readWithRetry(PROMPT_WINNING_NUMBER, parser);
     }
 
     @Override

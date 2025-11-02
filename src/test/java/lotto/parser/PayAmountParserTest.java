@@ -11,17 +11,26 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 public class PayAmountParserTest {
-    InputParser<PayAmount> payAmountParser = new PayAmountParser();
+    private static final InputParser<PayAmount> payAmountParser = new PayAmountParser();
+    private static final String ERROR_PREFIX = "[ERROR]";
+
 
     @Test
     @DisplayName("정상 값 테스트")
     void parseNormal() {
-        assertThatNoException().isThrownBy(() -> {
-            for (int i = 1000; i <= 1_000_000; i += 1000) {
-                PayAmount payAmount = payAmountParser.parse(String.valueOf(i));
-                assertThat(payAmount.amount()).isEqualTo(i);
-            }
-        });
+        for (int i = 1000; i <= 1_000_000; i += 1000) {
+            PayAmount payAmount = payAmountParser.parse(String.valueOf(i));
+            assertThat(payAmount.amount()).isEqualTo(i);
+        }
+    }
+
+    @Test
+    @DisplayName("공백 포함된 금액 테스트")
+    void parseBlankIncludedNumber() {
+        for (int i = 1000; i <= 1_000_000; i += 1000) {
+            PayAmount payAmount = payAmountParser.parse(i + "  ");
+            assertThat(payAmount.amount()).isEqualTo(i);
+        }
     }
 
     // === 예외 상황 ===
@@ -29,8 +38,9 @@ public class PayAmountParserTest {
     @DisplayName("1000원 단위 아니면 에러")
     @ValueSource(strings = {"1", "10", "100", "1200", "1001"})
     void notDivIn1000() {
-        assertThatException().isThrownBy(() -> payAmountParser.parse("100"))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> payAmountParser.parse("100"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ERROR_PREFIX);
     }
 
     @Test
@@ -60,7 +70,7 @@ public class PayAmountParserTest {
     @DisplayName("INT 범위 밖 입력 에러")
     void intOutOfRange() {
         List<String> longValues = List.of(String.valueOf(0x80000000L), "2147484000");
-        for  (String value : longValues) {
+        for (String value : longValues) {
             assertThatException().isThrownBy(() -> payAmountParser.parse(value))
                     .isInstanceOf(IllegalArgumentException.class);
         }

@@ -9,10 +9,11 @@ public enum ErrorMessage {
 
     // === 로또 ====
     LOTTO_NUMBER_DUPLICATES("번호가 중복됩니다."),
-    GENERATED_LOTTO_MISMATCH("로또 생성 개수가 구입 개수와 일치하지 않습니다.");
+    GENERATED_LOTTO_MISMATCH("로또 생성 개수가 구입 개수와 일치하지 않습니다."),
 
     // === 당첨 번호 ===
-
+    WINNING_NUMBER_CANNOT_SPLIT("공백은 당첨 번호가 될 수 없습니다."),
+    WINNING_NUMBER_NOT_INTEGER("당첨 번호가 정수가 아닙니다.");
 
     private final String message;
 
