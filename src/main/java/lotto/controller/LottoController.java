@@ -16,7 +16,7 @@ public class LottoController {
     public void run() {
         PayAmount payAmount = view.readPayAmount();
         PurchasedLottos purchasedLottos = lottoService.generateLottos(payAmount);
-        view.printPurchasedLottos(purchasedLottos);
+        view.printPurchasedLottos(purchasedLottos.toDto());
         WinningCriteria winningCriteria = view.readWinningCriteria();
         view.close();
     }

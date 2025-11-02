@@ -3,6 +3,8 @@ package lotto.view;
 import camp.nextstep.edu.missionutils.Console;
 import lotto.constants.UIConstant;
 import lotto.domain.*;
+import lotto.dto.LottoDto;
+import lotto.dto.PurchasedLottosDto;
 import lotto.parser.InputParser;
 import lotto.parser.PayAmountParser;
 import lotto.parser.WinningCriteriaParser;
@@ -40,19 +42,19 @@ public class ConsoleView implements View {
     }
 
     @Override
-    public void printPurchasedLottos(PurchasedLottos lottos) {
-        int lottoCount = lottos.size();
+    public void printPurchasedLottos(PurchasedLottosDto lottosDto) {
+        int lottoCount = lottosDto.size();
 
         System.out.println();
         System.out.printf(PROMPT_PURCHASED_LOTTOS_FORMAT, lottoCount);
-        for (Lotto lotto : lottos.getPurchasedLottos()) {
+        for (LottoDto lotto : lottosDto.lottos()) {
             printLotto(lotto);
         }
         System.out.println();
     }
 
-    private void printLotto(Lotto lotto) {
-        String lottoContent = lotto.getNumbers().stream()
+    private void printLotto(LottoDto lotto) {
+        String lottoContent = lotto.numbers().stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining(LOTTO_NUMBER_DELIMITER, LIST_PREFIX, LIST_SUFFIX));
         System.out.println(lottoContent);

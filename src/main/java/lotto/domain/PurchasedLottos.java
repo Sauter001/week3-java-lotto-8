@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.constants.ErrorMessage;
+import lotto.dto.LottoDto;
+import lotto.dto.PurchasedLottosDto;
 import lotto.exception.LottoException;
 
 import java.util.Collections;
@@ -26,5 +28,12 @@ public class PurchasedLottos {
 
     public List<Lotto> getPurchasedLottos() {
         return Collections.unmodifiableList(lottos);
+    }
+
+    public PurchasedLottosDto toDto() {
+        List<LottoDto> dtos = this.lottos.stream()
+                .map(lotto -> new LottoDto(lotto.getNumbers()))
+                .toList();
+        return new PurchasedLottosDto(dtos);
     }
 }
