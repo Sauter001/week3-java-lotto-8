@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.constants.ErrorMessage;
+import lotto.constants.Rank;
 import lotto.exception.LottoException;
 
 import java.util.List;
@@ -15,8 +16,10 @@ public class WinningCriteria {
         this.bonusNumber = bonusNumber;
     }
 
-    public WinningCounter countWinnings(PurchasedLottos purchasedLottos) {
-         return purchasedLottos.countMatchedNumbers(winningNumbers, bonusNumber);
+    public Rank determineFrom(Lotto lotto) {
+        int matchCount = this.winningNumbers.countMatchedNumberFrom(lotto);
+        boolean matchesBonus = lotto.hasBonusNumber(this.bonusNumber);
+        return Rank.of(matchCount, matchesBonus);
     }
 
     private void validateNotDuplication(WinningNumbers winningNumbers, BonusNumber bonusNumber) {

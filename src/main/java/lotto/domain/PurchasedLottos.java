@@ -26,17 +26,10 @@ public class PurchasedLottos {
         }
     }
 
-    public WinningCounter countMatchedNumbers(WinningNumbers winningNumbers, BonusNumber bonusNumber) {
-        WinningCounter winningCounter = new WinningCounter();
-
-        for (Lotto lotto : this.lottos) {
-            int countedWinningNumber = winningNumbers.countMatchedNumberFrom(lotto);
-            boolean matchesBonus = lotto.hasBonusNumber(bonusNumber);
-            Rank rank = Rank.of(countedWinningNumber, matchesBonus);
-
-            winningCounter.increment(rank);
-        }
-        return winningCounter;
+    public List<Rank> determineRanksBy(WinningCriteria winningCriteria) {
+        return this.lottos.stream()
+                .map(winningCriteria::determineFrom)
+                .toList();
     }
 
     public PurchasedLottosDto toDto() {

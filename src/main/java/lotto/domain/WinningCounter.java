@@ -6,26 +6,32 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 public class WinningCounter {
     private final Map<Rank, Integer> counter;
 
-    public WinningCounter() {
-        this.counter = initialize();
+    private WinningCounter(List<Rank> ranks) {
+        this.counter = initialize(ranks);
     }
 
-    private static Map<Rank, Integer> initialize() {
+    private static Map<Rank, Integer> initialize(List<Rank> ranks) {
         Map<Rank, Integer> counter = new EnumMap<>(Rank.class);
         for (Rank rank : Rank.values()) {
             counter.put(rank, 0);
         }
+
+        for (Rank rank : ranks) {
+            counter.put(rank, counter.get(rank) + 1);
+        }
         return counter;
     }
 
-    public void increment(Rank rank) {
-        counter.put(rank, counter.get(rank) + 1);
+    public static WinningCounter from(List<Rank> ranks) {
+        return new WinningCounter(ranks);
     }
+
 
     private long calculateTotalPrize() {
         long result = 0L;
