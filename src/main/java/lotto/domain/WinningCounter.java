@@ -52,7 +52,7 @@ public class WinningCounter {
         final int ROUND_SCALE = 1;
 
         return new BigDecimal(totalPrize)
-                .multiply(new BigDecimal(PERCENTAGE_RATE))
-                .divide(new BigDecimal(payAmount.amount()), ROUND_SCALE, RoundingMode.HALF_UP);
+                .multiply(BigDecimal.valueOf(PERCENTAGE_RATE))
+                .divide(BigDecimal.valueOf(payAmount.amount()), ROUND_SCALE, RoundingMode.HALF_UP);
     }
 }
