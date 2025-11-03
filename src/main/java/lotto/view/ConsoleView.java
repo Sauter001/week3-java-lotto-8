@@ -71,7 +71,6 @@ public class ConsoleView implements View {
 
     private void printProfitRate(BigDecimal bigDecimal) {
         DecimalFormat decimalFormat = new DecimalFormat("#,##0.0");
-        decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
         System.out.printf(OUTPUT_PROFIT_RATE, decimalFormat.format(bigDecimal));
     }
 
