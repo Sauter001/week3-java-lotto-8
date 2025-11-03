@@ -32,7 +32,6 @@ public class WinningCounter {
         return new WinningCounter(ranks);
     }
 
-
     private long calculateTotalPrize() {
         long result = 0L;
         for (Rank rank : Rank.values()) {
@@ -43,7 +42,8 @@ public class WinningCounter {
     }
 
     public Map<Rank, Integer> getMap() {
-        return Collections.unmodifiableMap(counter);
+        // 불변 Map 객체 생성
+        return Map.copyOf(counter);
     }
 
     public BigDecimal calculateRateOfProfit(PayAmount payAmount) {

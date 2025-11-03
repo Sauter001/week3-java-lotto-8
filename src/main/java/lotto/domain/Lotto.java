@@ -26,7 +26,7 @@ public class Lotto {
 
     public List<Integer> getNumbers() {
         // 불변 리스트 반환
-        return Collections.unmodifiableList(numbers);
+        return List.copyOf(numbers);
     }
 
     public boolean hasBonusNumber(BonusNumber bonusNumber) {
