@@ -49,7 +49,7 @@ public class WinningCounter {
     public BigDecimal calculateRateOfProfit(PayAmount payAmount) {
         final long totalPrize = this.calculateTotalPrize();
         final int PERCENTAGE_RATE = 100;
-        final int ROUND_SCALE = 1;
+        final int ROUND_SCALE = 2;
 
         return new BigDecimal(totalPrize)
                 .multiply(BigDecimal.valueOf(PERCENTAGE_RATE))
