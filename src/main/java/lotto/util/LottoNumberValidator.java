@@ -10,7 +10,7 @@ import lotto.exception.UtilClassException;
 import java.util.HashSet;
 import java.util.List;
 
-public class LottoNumberValidator {
+public final class LottoNumberValidator {
     private LottoNumberValidator() {
         throw new UtilClassException();
     }
