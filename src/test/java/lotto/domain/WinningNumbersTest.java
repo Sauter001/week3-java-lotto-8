@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinningNumbersTest {
     private static final Lotto defaultLotto = new Lotto(List.of(1, 2, 3, 5, 7, 45));
@@ -20,7 +19,7 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("로또 번호 완전 매칭")
     void matchLottoNumberFull() {
-        WinningNumbers  winningNumbers = new WinningNumbers(List.of(1, 2, 3, 5, 7, 45));
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 5, 7, 45));
 
         assertThat(winningNumbers.countMatchedNumberFrom(defaultLotto)).isEqualTo(6);
     }
@@ -28,7 +27,7 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("로또 번호 완전 불일치")
     void mismatchWholeLottoNumber() {
-        WinningNumbers  winningNumbers = new WinningNumbers(List.of(4, 6, 9, 10, 25, 31));
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(4, 6, 9, 10, 25, 31));
 
         assertThat(winningNumbers.countMatchedNumberFrom(defaultLotto)).isEqualTo(0);
     }
@@ -36,7 +35,7 @@ public class WinningNumbersTest {
     @Test
     @DisplayName("로또 번호 일부 일치")
     void mismatchPartialLottoNumber() {
-        WinningNumbers  winningNumbers = new WinningNumbers(List.of(1, 2, 3, 6, 9, 45));
+        WinningNumbers winningNumbers = new WinningNumbers(List.of(1, 2, 3, 6, 9, 45));
 
         assertThat(winningNumbers.countMatchedNumberFrom(defaultLotto)).isEqualTo(4);
     }

@@ -17,7 +17,7 @@ class LottoTest {
     @Test
     @DisplayName("정렬 되지 않은 로또 번호 자동 정렬")
     void lottoSorted() {
-        Lotto lotto = new  Lotto(List.of(1, 7, 3, 9, 24, 10));
+        Lotto lotto = new Lotto(List.of(1, 7, 3, 9, 24, 10));
         List<Integer> numbers = lotto.getNumbers();
 
         for (int i = 0; i < numbers.size() - 1; i++) {

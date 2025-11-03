@@ -15,7 +15,6 @@ import lotto.parser.WinningCriteriaParser;
 import lotto.parser.WinningNumbersParser;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +79,7 @@ public class ConsoleView implements View {
             bonusRequirement = BONUS_REQUIRED;
         }
 
-        DecimalFormat prizeFormat =  new DecimalFormat("#,##0");
+        DecimalFormat prizeFormat = new DecimalFormat("#,##0");
         String prizeOutput = prizeFormat.format(rank.getPrize());
 
         System.out.printf(OUTPUT_MATCHED_RANK_INFO_FORMAT, rank.getNumberToMatch(), bonusRequirement, prizeOutput, matchedCount);

@@ -66,7 +66,8 @@ public class BonusNumberParserTest {
         for (String value : longValues) {
             assertThatThrownBy(() -> parser.parse(value))
                     .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining(ERROR_PREFIX);;
+                    .hasMessageContaining(ERROR_PREFIX);
+            ;
         }
     }
 }

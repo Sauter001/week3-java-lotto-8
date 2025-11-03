@@ -4,8 +4,6 @@ import lotto.constants.ErrorMessage;
 import lotto.constants.Rank;
 import lotto.exception.LottoException;
 
-import java.util.List;
-
 public class WinningCriteria {
     private final WinningNumbers winningNumbers;
     private final BonusNumber bonusNumber;

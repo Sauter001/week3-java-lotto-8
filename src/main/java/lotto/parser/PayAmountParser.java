@@ -4,7 +4,7 @@ import lotto.constants.ErrorMessage;
 import lotto.domain.PayAmount;
 import lotto.exception.LottoException;
 
-public class PayAmountParser implements  InputParser<PayAmount> {
+public class PayAmountParser implements InputParser<PayAmount> {
     @Override
     public PayAmount parse(String input) {
         if (input.isBlank()) {

@@ -2,7 +2,6 @@ package lotto.parser;
 
 import lotto.constants.ErrorMessage;
 import lotto.domain.BonusNumber;
-import lotto.domain.WinningNumbers;
 import lotto.exception.LottoException;
 
 public class BonusNumberParser implements InputParser<BonusNumber> {
